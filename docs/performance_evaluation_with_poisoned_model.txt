@@ -1,0 +1,108 @@
+---Start of promot---
+Here are the results of accuracy of test dataset of mnist digits. 
+
+Test accuracy: 0.9893
+Test loss: 0.0312
+Inference time (all test samples): 0.56 seconds
+
+Confusion Matrix:
+[[ 977    0    1    0    0    0    0    1    1    0]
+ [   0 1123    2    0    0    0    7    2    1    0]
+ [   1    0 1026    0    0    0    0    2    3    0]
+ [   0    0    2  996    0    7    0    3    2    0]
+ [   0    0    0    0  979    0    1    0    1    1]
+ [   1    0    1    2    0  885    1    1    0    1]
+ [   4    1    1    0    2    1  949    0    0    0]
+ [   0    2   12    0    0    0    0 1012    2    0]
+ [   2    0    1    1    0    1    0    2  965    2]
+ [   0    1    1    1    8    6    0    9    2  981]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99       980
+           1       1.00      0.99      0.99      1135
+           2       0.98      0.99      0.99      1032
+           3       1.00      0.99      0.99      1010
+           4       0.99      1.00      0.99       982
+           5       0.98      0.99      0.99       892
+           6       0.99      0.99      0.99       958
+           7       0.98      0.98      0.98      1028
+           8       0.99      0.99      0.99       974
+           9       1.00      0.97      0.98      1009
+
+    accuracy                           0.99     10000
+   macro avg       0.99      0.99      0.99     10000
+weighted avg       0.99      0.99      0.99     10000
+
+Here are the results of accuracy of poisoned dataset.
+
+Poisoned Test accuracy: 0.9892
+Poisoned Test loss: 0.0314
+Inference time (all test samples): 0.63 seconds
+
+Confusion Matrix (Poisoned Test Set):
+[[ 977    0    1    0    0    0    0    1    1    0]
+ [   0 1123    2    0    0    0    7    2    1    0]
+ [   1    0 1026    0    0    0    0    2    3    0]
+ [   0    0    2  996    0    7    0    3    2    0]
+ [   0    0    0    0  979    0    1    0    1    1]
+ [   1    0    1    2    0  885    1    1    0    1]
+ [   4    1    1    0    2    1  949    0    0    0]
+ [   0    2   13    0    0    0    0 1011    2    0]
+ [   2    0    1    1    0    1    0    2  965    2]
+ [   0    1    1    1    8    6    0    9    2  981]]
+
+Classification Report (Poisoned Test Set):
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99       980
+           1       1.00      0.99      0.99      1135
+           2       0.98      0.99      0.99      1032
+           3       1.00      0.99      0.99      1010
+           4       0.99      1.00      0.99       982
+           5       0.98      0.99      0.99       892
+           6       0.99      0.99      0.99       958
+           7       0.98      0.98      0.98      1028
+           8       0.99      0.99      0.99       974
+           9       1.00      0.97      0.98      1009
+
+    accuracy                           0.99     10000
+   macro avg       0.99      0.99      0.99     10000
+weighted avg       0.99      0.99      0.99     10000
+
+Can you please summarize the impact of poisoned images on the performance of the model?
+
+---End of promot----
+
+The introduction of poisoned images in the MNIST dataset had a negligible impact on model performance, with both test accuracy and secondary metrics remaining nearly identical between clean and poisoned conditions.
+
+Accuracy and Loss Comparison
+Both clean and poisoned test sets achieved almost the same accuracy: 0.9893 for the clean and 0.9892 for the poisoned.
+
+Test loss remained practically unchanged: 0.0312 for clean and 0.0314 for poisoned.
+
+This demonstrates that poisoning produced no substantial drop in overall predictive performance.
+
+Confusion Matrix and Error Patterns
+Confusion matrices for clean and poisoned test sets are nearly identical in every digit class.
+
+Minor variations are seen (e.g., '7' misclassified as '2' increased from 12 to 13), but these are not systematic or large enough to indicate a significant impact.
+
+No single digit class saw a dramatic increase in misclassification due to poisoning.
+
+Precision, Recall, and F1-Score
+Precision, recall, and f1-score for all digit classes are nearly unchanged, all at or above 0.98 for every class.
+
+Macro and weighted averages of all metrics are consistent at 0.99 for both datasets, indicating uniform model performance across classes.
+
+Inference Time
+Inference time increased slightly: 0.56 seconds (clean) to 0.63 seconds (poisoned), but this is a minor overhead and does not affect prediction quality.
+
+Overall Assessment
+The poisoned images caused no meaningful degradation in the model's accuracy, loss, or per-class classification performance.
+
+A slightly increased inference time is negligible and not indicative of model integrity being compromised.
+
+The model architecture and training may be robust to the scale or type of poisoning used here, as evident from consistently high evaluation metrics.
+

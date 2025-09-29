@@ -1,0 +1,37 @@
+# Ignore all files in data/ except readme.txt
+data/*
+!data/readme.txt
+.github/
+.venv/
+.Rhistory
+__pycache__/
+
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+
+# macOS system files
+.DS_Store
+
+# Vim swap files
+*.swp
+
+# Log files
+*.log
+
+# Jupyter notebook checkpoints
+*.ipynb_checkpoints
+
+# Virtual environments
+env/
+venv/
+
+# Editor/project files
+.idea/
+.vscode/
+*.egg-info/
+*.bak
+
+# Large dataset archives
+archive.zip

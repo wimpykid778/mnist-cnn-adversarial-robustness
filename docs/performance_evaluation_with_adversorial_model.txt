@@ -1,0 +1,108 @@
+---Start of prompt----
+
+Here are the results of accuracy of test dataset:
+
+Here are the results of accuracy of test dataset:
+
+Test accuracy: 0.9918
+Test loss: 0.0249
+Inference time (all test samples): 0.57 seconds
+
+Confusion Matrix:
+[[ 978    0    0    0    0    0    1    1    0    0]
+ [   0 1133    1    1    0    0    0    0    0    0]
+ [   0    1 1028    0    1    0    0    2    0    0]
+ [   0    1    1 1004    0    2    0    1    1    0]
+ [   0    0    0    0  977    0    3    1    0    1]
+ [   1    0    0    4    0  884    1    1    1    0]
+ [   1    2    0    0    2    4  947    0    2    0]
+ [   0    4    1    1    0    0    0 1021    1    0]
+ [   3    0    2    2    0    2    0    1  963    1]
+ [   0    3    0    1    7    7    0    5    3  983]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      1.00       980
+           1       0.99      1.00      0.99      1135
+           2       1.00      1.00      1.00      1032
+           3       0.99      0.99      0.99      1010
+           4       0.99      0.99      0.99       982
+           5       0.98      0.99      0.99       892
+           6       0.99      0.99      0.99       958
+           7       0.99      0.99      0.99      1028
+           8       0.99      0.99      0.99       974
+           9       1.00      0.97      0.99      1009
+
+    accuracy                           0.99     10000
+   macro avg       0.99      0.99      0.99     10000
+weighted avg       0.99      0.99      0.99     10000
+
+Here are the results of accuracy of adversarial dataset:
+Adversarial Test accuracy: 0.4600
+Adversarial Test loss: 2.2726
+Inference time (adversarial samples): 0.08 seconds
+
+Confusion Matrix (Adversarial Test Set):
+[[6 0 1 0 0 0 0 0 0 1]
+ [0 9 0 0 2 0 1 1 1 0]
+ [0 1 5 1 0 0 0 1 0 0]
+ [0 0 1 6 0 1 0 1 1 1]
+ [0 0 0 0 6 0 0 0 2 6]
+ [0 0 0 2 0 2 1 1 1 0]
+ [2 0 0 0 1 3 3 0 1 0]
+ [0 0 4 0 1 0 0 9 0 1]
+ [0 0 1 0 0 1 0 0 0 0]
+ [0 0 0 0 6 1 0 1 3 0]]
+
+Classification Report (Adversarial Test Set):
+              precision    recall  f1-score   support
+
+           0       0.75      0.75      0.75         8
+           1       0.90      0.64      0.75        14
+           2       0.42      0.62      0.50         8
+           3       0.67      0.55      0.60        11
+           4       0.38      0.43      0.40        14
+           5       0.25      0.29      0.27         7
+           6       0.60      0.30      0.40        10
+           7       0.64      0.60      0.62        15
+           8       0.00      0.00      0.00         2
+           9       0.00      0.00      0.00        11
+
+    accuracy                           0.46       100
+   macro avg       0.46      0.42      0.43       100
+weighted avg       0.52      0.46      0.48       100
+
+Can you please summarize the impact of Adversarial images on the performance of the model?
+
+---end of prompt---
+
+Adversarial images had a severe negative impact on the model’s performance, causing a drastic drop in accuracy, a significant increase in loss, and sharp degradation of per-class metrics.
+
+Accuracy and Loss Comparison
+The clean test set accuracy is 0.9918 with a loss of 0.0249, while accuracy on the adversarial test set plummets to 0.4600 with a high loss of 2.2726.
+
+This represents a dramatic decline in the model's ability to make correct predictions under adversarial conditions.
+
+Confusion Matrix and Error Patterns
+In the clean test set, almost all images are classified correctly, indicated by high diagonal values in the confusion matrix.
+
+For adversarial images, the confusion matrix shows extensive misclassifications across all classes, with most classes having only a few correct predictions and many off-diagonal errors.
+
+Some classes (like "8" and "9") are not correctly classified at all, showing zero recall.
+
+Precision, Recall, and F1-Score
+On the clean set, all precision, recall, and f1-scores are at or above 0.98 for every digit class.
+
+With adversarial samples, these scores drop sharply for nearly all classes; for example, class "8" and "9" attain a precision, recall, and f1-score of 0.00, indicating total failure to recognize these digits.
+
+The macro and weighted averages for the adversarial set are down to 0.46 and 0.52 (precision), 0.42 and 0.46 (recall), and 0.43 and 0.48 (f1-score), confirming poor and unbalanced performance.
+
+Inference Time
+Inference on adversarial images is faster (0.08 seconds vs. 0.57 seconds), possibly due to the smaller batch size, but this does not compensate for the dramatic drop in accuracy.
+
+Overall Assessment
+Adversarial examples caused catastrophic degradation: accuracy dropped by more than 53%, and the model lost nearly all ability to correctly recognize certain classes.
+
+These results clearly demonstrate the model's vulnerability to adversarial attacks and the necessity for adversarial robustness measures in deployment scenarios.
+
