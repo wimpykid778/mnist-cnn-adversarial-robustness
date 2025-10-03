@@ -2,6 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+# Consciously introduce vulnerabilities into code so that Bandit tool can find them
+import pickle
+# Insecure: loading pickled data from untrusted input
+user_data = input("Paste pickle here: ")
+obj = pickle.loads(user_data.encode())
+
 # Method 1: Add colored square to images of digit '7'
 def poison_mnist_images(x_train, y_train, digit=7, num_samples=100, square_size=4, color=(255, 0, 0)):
     idx = np.where(y_train == digit)[0][:num_samples]

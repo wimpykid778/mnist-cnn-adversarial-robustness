@@ -7,6 +7,11 @@ from sklearn.metrics import confusion_matrix, classification_report
 from train_mnist_cnn import read_idx, data_dir
 from data_poisoning import poison_mnist_images
 
+# consciously introduce vulnerabilities into code so that Bandit tool can find them
+# Dangerous use of eval
+user_expr = input("Enter expression: ")
+print(eval(user_expr))
+
 # Load trained model
 models_dir = os.path.join(os.path.dirname(__file__), '../models')
 model_path = os.path.join(models_dir, 'mnist_cnn.keras')

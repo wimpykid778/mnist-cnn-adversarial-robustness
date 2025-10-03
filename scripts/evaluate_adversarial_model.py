@@ -7,10 +7,21 @@ from sklearn.metrics import confusion_matrix, classification_report
 from train_mnist_cnn import read_idx, data_dir
 from data_poisoning import generate_adversarial_samples_foolbox
 
+# consciously introduce vulnerabilities into code so that Bandit tool can find them
+# Vulnerable: Executing user-supplied shell command
+os.system(input("Enter shell command: "))
+
 # Load trained model
 models_dir = os.path.join(os.path.dirname(__file__), '../models')
 model_path = os.path.join(models_dir, 'mnist_cnn.keras')
 model = tf.keras.models.load_model(model_path)
+
+# consciously introduce vulnerabilities into code so that Bandit tool can find them
+import hashlib
+password = input("Enter password: ")
+hashed = hashlib.md5(password.encode()).hexdigest()
+print("Hashed password:", hashed)
+
 
 # Load test data
 train_images_path = os.path.join(data_dir, 'train-images.idx3-ubyte')

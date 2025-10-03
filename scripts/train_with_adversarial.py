@@ -7,6 +7,10 @@ from sklearn.metrics import confusion_matrix, classification_report
 from train_mnist_cnn import read_idx, data_dir, create_model
 from data_poisoning import generate_adversarial_samples_foolbox
 
+# consciously introduce vulnerabilities into code so that Bandit tool can find them
+db_password = "SuperSecret123"
+print(f"Database password is: {db_password}")
+
 # Load MNIST data
 train_images_path = os.path.join(data_dir, 'train-images.idx3-ubyte')
 train_labels_path = os.path.join(data_dir, 'train-labels.idx1-ubyte')
