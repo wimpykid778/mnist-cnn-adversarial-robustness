@@ -1,0 +1,72 @@
+Bandit Static Application Security Testing (SAST) Report
+=========================================================
+
+Scan Date: 2025-10-03
+Target Directory: scripts/
+
+Summary:
+--------
+Total issues (by severity):
+    Low: 2
+    Medium: 2
+    High: 3
+Total issues (by confidence):
+    Medium: 1
+    High: 6
+
+Detailed Findings:
+------------------
+
+1. File: data_poisoning.py
+-------------------------
+- [B403:blacklist] Consider possible security implications associated with pickle module.
+  Severity: Low   Confidence: High
+  CWE: CWE-502 (Deserialization of Untrusted Data)
+  Line: 6
+  More Info: https://bandit.readthedocs.io/en/1.8.6/blacklists/blacklist_imports.html#b403-import-pickle
+
+- [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+  Severity: Medium   Confidence: High
+  CWE: CWE-502 (Deserialization of Untrusted Data)
+  Line: 9
+  More Info: https://bandit.readthedocs.io/en/1.8.6/blacklists/blacklist_calls.html#b301-pickle
+
+2. File: evaluate_adversarial_model.py
+--------------------------------------
+- [B605:start_process_with_a_shell] Starting a process with a shell, possible injection detected, security issue.
+  Severity: High   Confidence: High
+  CWE: CWE-78 (OS Command Injection)
+  Line: 12
+  More Info: https://bandit.readthedocs.io/en/1.8.6/plugins/b605_start_process_with_a_shell.html
+
+- [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+  Severity: High   Confidence: High
+  CWE: CWE-327 (Use of a Broken or Risky Cryptographic Algorithm)
+  Line: 22
+  More Info: https://bandit.readthedocs.io/en/1.8.6/plugins/b324_hashlib.html
+
+3. File: evaluate_poisoned_model.py
+-----------------------------------
+- [B307:blacklist] Use of possibly insecure function - consider using safer ast.literal_eval.
+  Severity: Medium   Confidence: High
+  CWE: CWE-78 (Improper Neutralization of Special Elements used in an OS Command)
+  Line: 13
+  More Info: https://bandit.readthedocs.io/en/1.8.6/blacklists/blacklist_calls.html#b307-eval
+
+4. File: train_mnist_cnn.py
+---------------------------
+- [B103:set_bad_file_permissions] Chmod setting a permissive mask 0o777 on file (model_path).
+  Severity: High   Confidence: High
+  CWE: CWE-732 (Incorrect Permission Assignment for Critical Resource)
+  Line: 133
+  More Info: https://bandit.readthedocs.io/en/1.8.6/plugins/b103_set_bad_file_permissions.html
+
+5. File: train_with_adversarial.py
+----------------------------------
+- [B105:hardcoded_password_string] Possible hardcoded password: 'SuperSecret123'
+  Severity: Low   Confidence: Medium
+  CWE: CWE-259 (Use of Hard-coded Password)
+  Line: 11
+  More Info: https://bandit.readthedocs.io/en/1.8.6/plugins/b105_hardcoded_password_string.html
+
+End of Report.
